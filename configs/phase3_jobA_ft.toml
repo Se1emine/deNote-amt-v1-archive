@@ -1,0 +1,49 @@
+# Phase 3 Job A finetune — d_model=1024 (MusicFM-width). Curriculum 1→2→3.
+# Master §5 Job A / Phase 3 §7.1–7.2
+
+[run]
+name = "jobA_phase3"
+run_dir = "runs/jobA_phase3"
+
+[data]
+latent_manifest = "data/cache/phase3/manifest.jsonl"
+batch_size = 16
+chunk_sec = 4.0
+
+[model]
+use_latent_cache = true
+freeze_encoder = true
+d_model = 1024
+presence_k = 8
+n_programs = 8
+mode = "presence_adapter"
+
+[optim]
+lr = 0.0001
+weight_decay = 0.01
+max_steps = 5000
+ckpt_every = 500
+w_presence = 1.0
+w_aux = 0.0
+w_ce = 0.0
+
+[log]
+jsonl = true
+log_every = 20
+val_every = 100
+# Cap val forwards (no-grad InnerBackend). Keeps val_every=100 safe on 8GB.
+max_val_batches = 32
+
+[curriculum]
+enabled = true
+stage1_end = 800
+stage2_end = 2500
+max_instruments = 3
+
+[vocab]
+time_bin_sec = 0.01
+n_time_bins = 205
+n_pitches = 128
+n_velocity = 128
+n_programs = 8
+max_polyphony = 16

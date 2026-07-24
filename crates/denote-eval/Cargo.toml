@@ -1,0 +1,27 @@
+[package]
+name = "denote-eval"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Note-level F1 metrics + Job E multi-onset eval"
+
+[[bin]]
+name = "denote-eval"
+path = "src/main.rs"
+
+[features]
+default = ["ndarray-backend"]
+ndarray-backend = []
+
+[dependencies]
+anyhow.workspace = true
+burn = { workspace = true, features = ["std", "ndarray"] }
+clap.workspace = true
+denote-data.workspace = true
+denote-decode.workspace = true
+denote-model = { workspace = true }
+denote-tokens.workspace = true
+env_logger.workspace = true
+log.workspace = true
+serde.workspace = true
+serde_json.workspace = true

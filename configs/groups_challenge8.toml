@@ -1,0 +1,23 @@
+# Challenge instrument groups G0–G3 (K=8 programs).
+# Master: PLAN_Denote_Free_Modular.md §2.6
+# Phase:  PLAN_Phase2_Modular_Decoders.md §1.3 / WP2.1
+
+[[group]]
+id = 0
+name = "keys"
+programs = [0]
+
+[[group]]
+id = 1
+name = "strings"
+programs = [1, 2, 3]
+
+[[group]]
+id = 2
+name = "wood"
+programs = [4, 5, 7]
+
+[[group]]
+id = 3
+name = "brass"
+programs = [6]

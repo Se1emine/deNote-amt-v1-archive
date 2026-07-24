@@ -1,0 +1,48 @@
+﻿# free_1070 Job B — d_model=1024
+
+[run]
+name = "jobB_g1_phase1"
+run_dir = "runs/jobB_g1"
+job_a_ckpt = "runs/jobA_smoke/checkpoints/last"
+
+[data]
+latent_manifest = "data/cache/phase1_mini/manifest.jsonl"
+g1_id = 1
+batch_size = 4
+max_token_len = 256
+chunk_sec = 4.0
+
+[model]
+freeze_adapter = true
+freeze_presence = true
+d_model = 1024
+presence_k = 8
+n_programs = 8
+decoder_layers = 2
+decoder_heads = 16
+decoder_ff_mult = 4
+decoder_dropout = 0.0
+single_decoder = false
+
+[optim]
+lr = 0.0003
+weight_decay = 0.01
+max_steps = 2000
+ckpt_every = 500
+label_smoothing = 0.0
+
+[log]
+jsonl = true
+log_every = 10
+val_every = 50
+
+[g1s]
+path = "configs/g1s_challenge8.toml"
+
+[vocab]
+time_bin_sec = 0.01
+n_time_bins = 205
+n_pitches = 128
+n_velocity = 128
+n_programs = 8
+max_polyphony = 16

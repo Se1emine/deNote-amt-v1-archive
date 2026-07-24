@@ -1,0 +1,17 @@
+[package]
+name = "denote-audio"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Audio load, resample, STFT and log-mel features for Denote-CRNN"
+
+[dependencies]
+anyhow.workspace = true
+hound.workspace = true
+ndarray.workspace = true
+num-complex.workspace = true
+realfft.workspace = true
+rubato.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+symphonia.workspace = true

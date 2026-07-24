@@ -1,0 +1,36 @@
+﻿# Phase 1 Job L0 — MusicFM-width d_model=1024 (GTX 1070; depth reduced for OOM).
+# Master: PLAN_Denote_Free_Modular.md
+
+[run]
+name = "cache_l0_phase1"
+run_dir = "runs/cache_l0_phase1"
+
+[data]
+input_dir = "data/raw/phase1_mini"
+cache_dir = "data/cache/phase1_mini"
+manifest_name = "manifest.jsonl"
+train_ratio = 0.8
+chunk_sec = 4.0
+skip_existing = true
+
+[audio]
+sample_rate = 24000
+
+[encoder]
+n_mels = 128
+conv_dim = 512
+encoder_dim = 1024
+encoder_depth = 4
+n_heads = 16
+ffn_mult = 4
+dropout = 0.0
+# weights_dir = "assets/musicfm_msd"
+allow_random_encoder = true
+
+[vocab]
+time_bin_sec = 0.01
+n_time_bins = 205
+n_pitches = 128
+n_velocity = 128
+n_programs = 8
+max_polyphony = 16

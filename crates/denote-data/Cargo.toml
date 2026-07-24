@@ -1,0 +1,19 @@
+[package]
+name = "denote-data"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "MIDI/JAMS labels, piano-roll targets, dataset cache I/O"
+
+[dependencies]
+anyhow.workspace = true
+bincode.workspace = true
+denote-audio.workspace = true
+denote-tokens.workspace = true
+log.workspace = true
+midly.workspace = true
+ndarray.workspace = true
+rand.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true

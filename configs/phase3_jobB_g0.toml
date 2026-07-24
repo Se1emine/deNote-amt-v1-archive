@@ -1,0 +1,58 @@
+# Phase 3 Job B_g0 вЂ” keys (program 0). d_model=1024 MusicFM-width.
+# After Job A phase3. Order: g0 в†’ g1 в†’ g2 в†’ g3.
+
+[run]
+name = "jobB_g0_phase3"
+run_dir = "runs/jobB_g0_phase3"
+job_a_ckpt = "runs/jobA_phase3/checkpoints/last"
+
+[data]
+latent_manifest = "data/cache/phase3/manifest.jsonl"
+group_id = 0
+batch_size = 8
+max_token_len = 256
+chunk_sec = 4.0
+
+[model]
+freeze_adapter = true
+freeze_presence = true
+d_model = 1024
+presence_k = 8
+n_programs = 8
+decoder_layers = 2
+decoder_heads = 16
+decoder_ff_mult = 4
+decoder_dropout = 0.0
+single_decoder = false
+
+[optim]
+lr = 0.00005
+grad_clipping = 1.0
+weight_decay = 0.01
+max_steps = 3000
+ckpt_every = 500
+label_smoothing = 0.0
+
+
+[log]
+jsonl = true
+log_every = 10
+val_every = 50
+max_val_batches = 16
+
+[curriculum]
+enabled = true
+stage1_end = 600
+stage2_end = 1800
+max_instruments = 3
+
+[groups]
+path = "configs/groups_challenge8.toml"
+
+[vocab]
+time_bin_sec = 0.01
+n_time_bins = 205
+n_pitches = 128
+n_velocity = 128
+n_programs = 8
+max_polyphony = 16

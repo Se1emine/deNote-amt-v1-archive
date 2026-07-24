@@ -1,0 +1,18 @@
+[package]
+name = "denote-encoder"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "MusicFM-compatible audio encoder (mel frontend + conv + Conformer) for Denote-MIROS"
+
+[dependencies]
+anyhow.workspace = true
+burn = { workspace = true, features = ["std", "ndarray"] }
+denote-audio.workspace = true
+log.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+burn = { workspace = true, features = ["std", "ndarray"] }

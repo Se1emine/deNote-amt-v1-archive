@@ -1,0 +1,37 @@
+# Phase 3 corpus — soft-target scale (plan §3: N_render 500–5k, N_train 5k–50k).
+# Disk-aware: intermediate FluidR3 full renders deleted after chunking.
+# Plan: PLAN_Phase3_Data_F1_vs_MIROS.md WP3.1–WP3.3 / master §6–7 Phase 3
+#
+#   cargo run -p denote-train --release -- --config configs/phase3_corpus.toml --job phase3-data
+
+[run]
+name = "phase3_corpus"
+run_dir = "runs/phase3_corpus"
+
+[data]
+out_dir = "data/raw/phase3"
+render_index = "data/raw/phase3/render_index.jsonl"
+train_ratio = 0.8
+repo_root = "."
+midi_dir = "data/raw/midi/clean_midi"
+# Soft-target render volume (plan soft 500–5000); 200 is max practical on ~14GB free + stem.
+max_midi = 200
+babyslakh_dir = "data/raw/babyslakh/babyslakh_16k"
+seed = 42
+
+[render]
+enabled = true
+sample_rate = 24000
+
+[stem]
+enabled = true
+# More mixes → more multi-instrument curriculum samples (1→2→3)
+mixes_per_track = 10
+max_instruments = 3
+min_instruments = 1
+
+[chunk]
+chunk_sec = 4.0
+hop_sec = 4.0
+min_notes = 1
+max_instruments = 3

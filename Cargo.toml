@@ -1,0 +1,48 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/denote-audio",
+    "crates/denote-tokens",
+    "crates/denote-encoder",
+    "crates/denote-data",
+    "crates/denote-model",
+    "crates/denote-decode",
+    "crates/denote-eval",
+    "crates/denote-train",
+    "crates/denote-infer",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["deNote diploma"]
+repository = "https://github.com/local/denote-ai-model"
+
+[workspace.dependencies]
+denote-audio = { path = "crates/denote-audio" }
+denote-tokens = { path = "crates/denote-tokens" }
+denote-encoder = { path = "crates/denote-encoder" }
+denote-data = { path = "crates/denote-data" }
+denote-model = { path = "crates/denote-model" }
+denote-decode = { path = "crates/denote-decode" }
+denote-eval = { path = "crates/denote-eval" }
+
+anyhow = "1"
+burn = { version = "0.21", default-features = false }
+clap = { version = "4", features = ["derive"] }
+hound = "3.5"
+log = "0.4"
+env_logger = "0.11"
+midly = "0.5"
+ndarray = "0.16"
+num-complex = "0.4"
+realfft = "3"
+rubato = "0.16"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+toml = "0.8"
+rand = "0.8"
+bincode = "1.3"
+symphonia = { version = "0.5", default-features = false, features = ["wav", "mp3", "flac", "ogg", "pcm"] }

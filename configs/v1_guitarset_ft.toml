@@ -1,0 +1,51 @@
+# Denote-CRNN-v1 — GuitarSet finetune (from synthetic checkpoint)
+
+[audio]
+sample_rate = 22050
+n_fft = 2048
+hop_length = 256
+n_mels = 229
+fmin = 30.0
+fmax = 11025.0
+mel_eps = 1.0e-5
+
+[model]
+n_pitches = 88
+midi_offset = 21
+cnn_channels = [48, 48, 96, 96, 96]
+feat_dim = 256
+onset_hidden = 128
+frame_hidden = 128
+offset_hidden = 64
+dropout = 0.25
+
+[labels]
+onset_smear_frames = 1
+frame_onset_boost_frames = 5
+frame_onset_boost = 5.0
+min_note_frames = 5
+
+[train]
+chunk_sec = 2.0
+batch_size = 8
+grad_accum = 2
+epochs = 50
+lr = 0.0002
+weight_decay = 0.0001
+grad_clip = 3.0
+seed = 42
+num_workers = 0
+checkpoint_dir = "runs/guitarset"
+data_dir = "data/cache/guitarset"
+pretrained = "runs/synth/best.mpk"
+onset_weight = 1.0
+frame_weight = 1.0
+offset_weight = 0.5
+onset_pos_weight = 15.0
+
+[decode]
+onset_threshold = 0.5
+frame_threshold = 0.3
+offset_threshold = 0.5
+min_note_ms = 58.0
+merge_gap_ms = 40.0

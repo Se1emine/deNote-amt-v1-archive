@@ -1,0 +1,28 @@
+# Finish Phase 3 corpus: stem-mix only (Fluid already ~6k+ chunks on disk).
+[run]
+name = "phase3_stem_only"
+
+[data]
+out_dir = "data/raw/phase3"
+render_index = "data/raw/phase3/render_index_stem.jsonl"
+repo_root = "."
+midi_dir = "data/raw/midi/clean_midi"
+max_midi = 0
+babyslakh_dir = "data/raw/babyslakh/babyslakh_16k"
+seed = 42
+
+[render]
+enabled = false
+sample_rate = 24000
+
+[stem]
+enabled = true
+mixes_per_track = 10
+max_instruments = 3
+min_instruments = 1
+
+[chunk]
+chunk_sec = 4.0
+hop_sec = 4.0
+min_notes = 1
+max_instruments = 3

@@ -1,0 +1,40 @@
+﻿# Phase 1 Job A — adapter + presence, d_model=1024
+
+[run]
+name = "jobA_presence"
+run_dir = "runs/jobA_presence"
+
+[data]
+latent_manifest = "data/cache/phase1_mini/manifest.jsonl"
+batch_size = 8
+chunk_sec = 4.0
+
+[model]
+use_latent_cache = true
+freeze_encoder = true
+d_model = 1024
+presence_k = 8
+n_programs = 8
+mode = "presence_adapter"
+
+[optim]
+lr = 0.0003
+weight_decay = 0.01
+max_steps = 2000
+ckpt_every = 500
+w_presence = 1.0
+w_aux = 0.0
+w_ce = 0.0
+
+[log]
+jsonl = true
+log_every = 10
+val_every = 50
+
+[vocab]
+time_bin_sec = 0.01
+n_time_bins = 205
+n_pitches = 128
+n_velocity = 128
+n_programs = 8
+max_polyphony = 16

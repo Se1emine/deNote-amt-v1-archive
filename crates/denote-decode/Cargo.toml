@@ -1,0 +1,11 @@
+[package]
+name = "denote-decode"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Onset-gated frame decoding to note events"
+
+[dependencies]
+denote-tokens.workspace = true
+serde.workspace = true
+serde_json.workspace = true
