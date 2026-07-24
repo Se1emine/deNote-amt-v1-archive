@@ -1,5 +1,5 @@
-/plans
-/start
+/data/*
+!/data/.gitkeep
 /target
 /data
 /runs/*

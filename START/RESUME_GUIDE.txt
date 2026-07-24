@@ -1,0 +1,52 @@
+============================================================
+  RESUME TRAINING (Job A / Job B)
+============================================================
+
+AUTO (easiest)
+  02_JobA.bat          - if runs\jobA_phase3\checkpoints\last exists, resumes
+  03_JobB_g0.bat ...   - same for each Job B run-dir
+
+EXPLICIT RESUME
+  02b_JobA_resume.bat
+  02b_JobA_resume.bat last
+  02b_JobA_resume.bat step_000050
+
+  03b_JobB_resume.bat g0
+  03b_JobB_resume.bat g0 last
+  03b_JobB_resume.bat g1 step_000500
+  03b_JobB_resume.bat single
+
+MANUAL (PowerShell / cmd from project root)
+  set RUST_LOG=info
+
+  REM Job A from last:
+  .\target\release\denote-train.exe --config configs/phase3_jobA_ft.toml --job job-a --run-dir runs/jobA_phase3 --device cuda --resume runs/jobA_phase3/checkpoints/last
+
+  REM Job A from step 50:
+  .\target\release\denote-train.exe --config configs/phase3_jobA_ft.toml --job job-a --run-dir runs/jobA_phase3 --device cuda --resume runs/jobA_phase3/checkpoints/step_000050
+
+  REM Job B g0:
+  .\target\release\denote-train.exe --config configs/phase3_jobB_g0.toml --job job-b --run-dir runs/jobB_g0_phase3 --device cuda --resume runs/jobB_g0_phase3/checkpoints/last
+
+HOW STEP COUNTER WORKS
+  state.json has "step": N
+  After resume, training runs steps (N+1) .. (N + max_steps)
+  Example: stopped at 100, max_steps=5000 -> will train 100 MORE full budget
+            to only finish to global 5000: --max-steps 4900
+
+WHERE CHECKPOINTS ARE
+  Job A: runs\jobA_phase3\checkpoints\last\
+         runs\jobA_phase3\checkpoints\step_000500\
+         adapter.mpk + presence.mpk + state.json
+  Job B: runs\jobB_gX_phase3\checkpoints\last\decoder_gX.mpk
+
+IF STUCK / OOM / TDR
+  1) START\STOP_all.bat
+  2) Check last metrics.jsonl step
+  3) Resume from last or earlier step_* folder
+  4) val is now no-grad + max_val_batches=32 (safe with val_every=50/100)
+
+SEE ALSO
+  configs\phase3_jobA_ft.toml  max_val_batches
+  configs\phase3_jobB_g*.toml  max_val_batches
+============================================================
